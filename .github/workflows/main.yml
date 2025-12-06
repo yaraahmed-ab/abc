@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277 .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277:yara_ahmed_2023040277 .
 
       - name: Push image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277
