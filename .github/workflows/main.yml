@@ -8,23 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Testing'
-        run: pwd
-
-      - name: 'Tes'
-        run: echo hello
-
-      - name: 'Checkout code'
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: 'Listing'
-        run: ls -a
+      - name: 'Test'
+        run: echo hello
 
-      - name: 'Login to Docker'
-        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to Docker
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: 'Build image'
+      - name: Build image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277 .
 
-      - name: 'Push image'
+      - name: Push image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277
