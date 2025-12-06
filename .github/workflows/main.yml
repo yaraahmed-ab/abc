@@ -1,34 +1,30 @@
 on:
   push:
     branches:
-      - master 
-
-
-
-
-
+      - master
 
 jobs:
-   build:
-      runs-on: ubuntu-latest
-      
-         
-      steps:
-         - name: 'Testing'
-           run: pwd
+  build:
+    runs-on: ubuntu-latest
 
-         - name: 'Test'
-           run: echo hello 
+    steps:
+      - name: 'Testing'
+        run: pwd
 
-         - uses: actions/checkout@v3
+      - name: 'Test'
+        run: echo hello
 
-         - name: 'listing'
-           run: ls -a
+      - name: 'Checkout code'
+        uses: actions/checkout@v3
 
-         - name: 'Login to Docker'
-           run: docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
-         - name: 'build image'
-           run: docker build -t ${{secrets.DOCKER_USERNAME}}/yara_ahmed_2023040277 .
+      - name: 'Listing'
+        run: ls -a
 
-         - name: 'push image'
-           run: docker push ${{secrets.DOCKER_USERNAME}}/yara_ahmed_2023040277
+      - name: 'Login to Docker'
+        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: 'Build image'
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277 .
+
+      - name: 'Push image'
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277
