@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout 
         uses: actions/checkout@v3
 
       - name: Login to Docker Hub
@@ -16,10 +16,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/yaraahmad2023040277:latest .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/yara_ahmed_2023040277:latest
+      - name: Push image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/yaraahmad2023040277:latest
+
+      - name: Run container
+        run: |
+          docker run -d -p 8080:3000 --name mycontainer \
+          ${{ secrets.DOCKER_USERNAME }}/yaraahmad2023040277:latest
