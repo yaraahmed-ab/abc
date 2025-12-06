@@ -11,7 +11,7 @@ jobs:
       - name: 'Testing'
         run: pwd
 
-      - name: 'Test'
+      - name: 'Tes'
         run: echo hello
 
       - name: 'Checkout code'
